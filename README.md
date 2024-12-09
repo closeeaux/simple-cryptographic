@@ -1,4 +1,4 @@
-# simple-cryptographic
+# simple-cryptographic (GER)
 simple cryptographic program using python for my school project (code is really messy and i never added that many comments)
 (updating readme file soon)
 
