@@ -1,4 +1,10 @@
-                    GNU GENERAL PUBLIC LICENSE
+The license is only for the "main.py" file in the "script"-folder. 
+I dont take credits, for the files in "lib"-folder, because they are 
+part of open source libarys. if you are a Owner of a libary and have a problem, 
+that i include your code-libary files in my repository, than feel free
+to contact me and i will remove the files.
+
+                      GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
