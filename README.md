@@ -1,5 +1,5 @@
 # simple-cryptographic
-simple cryptographic program using python for my school project
+simple cryptographic program using python for my school project (code is really messy and i never added that many comments)
 (updating readme file soon)
 
 
