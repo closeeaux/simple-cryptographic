@@ -2,17 +2,6 @@ keysize = 16
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 import random
 import string
 import ctypes
@@ -191,23 +180,21 @@ letters = {
 
 def save_config(config_data, file_path='config.py'):
     with open(file_path, 'w') as f:
-        # Write the dictionary as Python code
         f.write(f"letters = {config_data}\n")
         print(file_path)
     print(f"Config file '{file_path}' saved.")
 
-# Function to load the configuration or create a new one as a Python file
 def load_config(file_path='config.py'):
-    # If the file does not exist, return the default dictionary
+
     if not os.path.exists(file_path):
-        save_config(letters, file_path)  # Create the Python file with the default data
+        save_config(letters, file_path) 
         print(f"Config file '{file_path}' created with default data.")
         return letters
     else:
-        # If the file exists, load the dictionary from the file
+    
         config_dict = {}
         with open(file_path, 'r') as f:
-            # Execute the Python code in the file (loads the dictionary)
+        
             exec(f.read(), config_dict)
         print(f"Config file '{file_path}' loaded.")
         return config_dict['letters']
@@ -229,11 +216,11 @@ from tkinter import ttk, messagebox
 
 def edit_letters_table(letters):
     def refresh_table():
-        # Clear the table
+      
         for row in tree.get_children():
             tree.delete(row)
 
-        # Insert updated data into the table
+       
         for key, value in letters.items():
             tree.insert("", "end", values=(key, value))
 
@@ -317,10 +304,10 @@ def edit_letters_table(letters):
     tk.Button(button_frame, text="Edit", command=edit_entry).pack(side=tk.LEFT, padx=5, pady=5)
     tk.Button(button_frame, text="Remove", command=remove_entry).pack(side=tk.LEFT, padx=5, pady=5)
 
-    # Populate the treeview with initial data
+  
     refresh_table()
 
-    # Run the Tkinter main loop
+   
     root.mainloop()
 
 
@@ -455,7 +442,7 @@ main = Crypter("", "", True)
 
 
 
-# Gui
+
 
 def button_decrypt():
     print(f"Button wurde geklickt.")      
