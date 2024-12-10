@@ -1,1 +1,1 @@
-python .\script\main.py
+.\script\main.py
