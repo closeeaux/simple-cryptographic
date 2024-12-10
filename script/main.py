@@ -197,7 +197,8 @@ def load_config(file_path='config.py'):
         
             exec(f.read(), config_dict)
         print(f"Config file '{file_path}' loaded.")
-        return config_dict['letters']
+        print(config_dict)
+        return config_dict
 
 
 
