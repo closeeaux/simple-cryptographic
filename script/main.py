@@ -587,7 +587,7 @@ file_entry = ctk.CTkEntry(input_frame, width=400, placeholder_text="Wähle eine 
 file_entry.pack(side="left", padx=5, pady = 5)
 
 
-file_button = ctk.CTkButton(input_frame, text="Suchen", command=select_file)
+file_button = ctk.CTkButton(input_frame, text="auswählen", command=select_file)
 file_button.pack(side="left", padx=5, pady = 5)
 
 
