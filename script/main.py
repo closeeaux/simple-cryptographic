@@ -180,15 +180,15 @@ letters = {
 
 def save_config(config_data, file_path='config.py'):
     with open(file_path, 'w') as f:
-        f.write(f"letters = {config_data}\n")
+        f.write(f"Konfig = {config_data}\n")
         print(file_path)
-    print(f"Config file '{file_path}' saved.")
+    print(f"Config '{file_path}' gespeichert.")
 
 def load_config(file_path='config.py'):
 
     if not os.path.exists(file_path):
         save_config(letters, file_path) 
-        print(f"Config file '{file_path}' created with default data.")
+        print(f"Config '{file_path}' mit standardwerten erstellt.")
         return letters
     else:
     
@@ -196,7 +196,7 @@ def load_config(file_path='config.py'):
         with open(file_path, 'r') as f:
         
             exec(f.read(), config_dict)
-        print(f"Config file '{file_path}' loaded.")
+        print(f"Config '{file_path}' geladen.")
         return config_dict['letters']
 
 
@@ -229,15 +229,15 @@ def edit_letters_table(letters):
         value = value_entry.get()
 
         if not key:
-            messagebox.showerror("Error", "Key cannot be empty.")
+            messagebox.showerror("Error", "Schlüssel kann nicht leer sein.")
             return
         if not value.isdigit():
-            messagebox.showerror("Error", "Value must be a number.")
+            messagebox.showerror("Error", "Wert muss eine Zahl sein.")
             return
 
         value = int(value)
         if key in letters:
-            messagebox.showerror("Error", "Key already exists. Use edit instead.")
+            messagebox.showerror("Error", "Schlüssel existiert schon. Bearbeite den Wert stattdessen")
         else:
             letters[key] = value
         
@@ -246,7 +246,7 @@ def edit_letters_table(letters):
     def remove_entry():
         selected_item = tree.selection()
         if not selected_item:
-            messagebox.showerror("Error", "No item selected.")
+            messagebox.showerror("Error", "Kein Objekt ausgewählt.")
             return
 
         key = tree.item(selected_item, "values")[0]
@@ -256,53 +256,53 @@ def edit_letters_table(letters):
     def edit_entry():
         selected_item = tree.selection()
         if not selected_item:
-            messagebox.showerror("Error", "No item selected.")
+            messagebox.showerror("Error", "Kein Objekt ausgewählt.")
             return
 
         key = tree.item(selected_item, "values")[0]
         new_value = value_entry.get()
 
         if not new_value.isdigit():
-            messagebox.showerror("Error", "Value must be a number.")
+            messagebox.showerror("Error", "Wert muss eine Zahl sein.")
             return
 
         letters[key] = int(new_value)
         refresh_table()
         
     def on_close():
-        if messagebox.askokcancel("Quit", "Do you want to save changes and exit?"):
+        if messagebox.askokcancel("Quit", "Möchstest du die Werte speichern und verlassen?"):
             root.destroy()
             save_config(letters)
             return letters
             
     root = tk.Tk()
-    root.title("Edit Table")
+    root.title("Einstellungen")
 
     root.protocol("WM_DELETE_WINDOW", on_close)
     
     columns = ("Key", "Value")
     tree = ttk.Treeview(root, columns=columns, show="headings")
-    tree.heading("Key", text="Key")
-    tree.heading("Value", text="Value")
+    tree.heading("Key", text="Buchstabe")
+    tree.heading("Value", text="Zahlenwert")
     tree.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
     form_frame = tk.Frame(root)
     form_frame.pack(fill=tk.X, padx=10, pady=5)
 
-    tk.Label(form_frame, text="Key:").grid(row=0, column=0, padx=5, pady=5)
+    tk.Label(form_frame, text="Buchstabe:").grid(row=0, column=0, padx=5, pady=5)
     key_entry = tk.Entry(form_frame)
     key_entry.grid(row=0, column=1, padx=5, pady=5)
 
-    tk.Label(form_frame, text="Value:").grid(row=0, column=2, padx=5, pady=5)
+    tk.Label(form_frame, text="Zahlenwert:").grid(row=0, column=2, padx=5, pady=5)
     value_entry = tk.Entry(form_frame)
     value_entry.grid(row=0, column=3, padx=5, pady=5)
 
     button_frame = tk.Frame(root)
     button_frame.pack(fill=tk.X, padx=10, pady=5)
 
-    tk.Button(button_frame, text="Add", command=add_entry).pack(side=tk.LEFT, padx=5, pady=5)
-    tk.Button(button_frame, text="Edit", command=edit_entry).pack(side=tk.LEFT, padx=5, pady=5)
-    tk.Button(button_frame, text="Remove", command=remove_entry).pack(side=tk.LEFT, padx=5, pady=5)
+    tk.Button(button_frame, text="Hinzufügen", command=add_entry).pack(side=tk.LEFT, padx=5, pady=5)
+    tk.Button(button_frame, text="Bearbeiten", command=edit_entry).pack(side=tk.LEFT, padx=5, pady=5)
+    tk.Button(button_frame, text="Entfernen", command=remove_entry).pack(side=tk.LEFT, padx=5, pady=5)
 
   
     refresh_table()
@@ -341,11 +341,11 @@ class Crypter:
             for char in self.key:
                 decrypted = (letters[char] ^ currentletter) + decrypted
                 currentletter = currentletter + 1
-                print("decrypted the %s. letter as Number %s" % (currentletter, (letters[char] ^ currentletter)))
-            print(f"decrypted key is: {decrypted}")
+                print("Entschlüsseltungsposition: %s. Buchstabe als Zahl: %s" % (currentletter, (letters[char] ^ currentletter)))
+            print(f"Schüssel generiert: {decrypted}")
             return decrypted
         except:
-            print("Something else went wrong. Probably the keyvalue isnt definied")
+            print("Irgendetwas ist schief gelaufen: Vermutlich trat ein Konflikt mit den Schlüsselwert auf")
     
             
              
@@ -356,7 +356,7 @@ class Crypter:
             if decryptingtable[currentchar] != "Not Encrypted":
                 
                 r = decryptingtable[currentchar]
-                print(f"r is {r} char is {currentchar}")
+                print(f"r lautet: {r}, char ist {currentchar}")
                 if r != ":":
                     
                     encrypted_char = int(encrypted_char)
@@ -370,13 +370,13 @@ class Crypter:
                     decrypted_char = (decrypted_char - r) // Lock  
                     original_char = getKeyByValue(int(decrypted_char))
 
-                    print("Decrypted character:", original_char)
+                    print("Entschlüsselter Wert:", original_char)
 
                     result.append(original_char)
                     currentchar = currentchar + 1
                 
             else:
-                print("Unencrypted character detected:", encrypted_char)
+                print("Unverschlüsselter Wert:", encrypted_char)
                 result.append(encrypted_char) 
                 currentchar = currentchar + 1
         
@@ -416,7 +416,7 @@ class Crypter:
                     result.append(char)
 
         
-        print("crypted text generated: \n" + str(result))
+        print("Verschlüsselten Text generiert: \n" + str(result))
         return result, Lock, decryptingtable, modulo1, modulo2
     
     
@@ -446,21 +446,21 @@ main = Crypter("", "", True)
 
 def button_decrypt():
     print(f"Button wurde geklickt.")      
-    show_message("Mode Changed","Changed to decrypting Mode!")
+    show_message("Modus geändert","Wechsel zum Entschlüsselungsmodus!")
     main.decrypting= True
     
      
     
 def button_encrypt():
     print(f"Button wurde geklickt.") 
-    show_message("Mode Changed","Changed to encrypting Mode!")
+    show_message("Modus geändert","Wechsel zum Verschlüsselungsmodus!")
     
     
     main.decrypting= False
 
     
 root = ctk.CTk()
-root.title("Cryptographic System")
+root.title("Cryptographic System (GER)")
 
 root.geometry(f"{1800}x{1000}+0+0")
 
@@ -471,7 +471,7 @@ title_label = ctk.CTkLabel(root, text="Cryptographic Software V 0.85", font=("Ar
 title_label.pack(pady=20)
 
 
-button_left1 = ctk.CTkButton(left_panel, text="Encrypt", command=lambda: button_encrypt(), height = 50)
+button_left1 = ctk.CTkButton(left_panel, text="Verschlüsseln", command=lambda: button_encrypt(), height = 50)
 button_left1.pack(padx=5, pady=5)  
 
 
@@ -480,10 +480,10 @@ def settings_menu():
     edit_letters_table(letters)
 
 
-button_left2 = ctk.CTkButton(left_panel, text="Decrypt", command=lambda: button_decrypt(), height = 50)
+button_left2 = ctk.CTkButton(left_panel, text="Entschlüsseln", command=lambda: button_decrypt(), height = 50)
 button_left2.pack(padx=5, pady=5) 
 
-button_left3 = ctk.CTkButton(left_panel, text="Settings", command=lambda: settings_menu(), height = 50)
+button_left3 = ctk.CTkButton(left_panel, text="Einstellungen", command=lambda: settings_menu(), height = 50)
 button_left3.pack(padx=5, pady=5, side="bottom")  
 
 
@@ -514,7 +514,7 @@ def action_button():
                         try:
                             decryptingtable = ast.literal_eval(decryptingtable_raw)
                         except Exception as e:
-                            raise ValueError(f"Failed to parse 'decryptingtable': {decryptingtable_raw}\nError: {e}")
+                            raise ValueError(f"Fehler beim parsen von 'decryptingtable': {decryptingtable_raw}\nError: {e}")
                                             
                         
                         print("Lock:", Lock)
@@ -522,13 +522,13 @@ def action_button():
                         print("modulo1:", modulo1)
                         print("modulo2:", modulo2)
                     else:
-                        print(f"File does not have 4 lines, found {len(lines)}.")
+                        print(f"Datei hat statt 4 Linien,  {len(lines)} Linien.")
                 except Exception as e:
-                    print(f"Error reading file: {e}")
+                    print(f"Fehler beim lesen der Datei: {e}")
             else:
-                print(f"File does not exist: {file_name}")
+                print(f"Datei existiert nichz: {file_name}")
         
-            print("starting decrypting")
+            print("Starte die Entschlüsselung")
             print(f"{center_text.get('1.0', 'end-1c')}")
             result = main.decrypt(ast.literal_eval(center_text.get("1.0", "end-1c")), Lock, modulo1, modulo2, decryptingtable)
             
@@ -538,11 +538,11 @@ def action_button():
 
     else:
         main.genkey(16)
-        print("starting encrypting")
+        print("starte Verschlüsselung")
         cryptedtext, Lock, decryptingtable, modulo1, modulo2 = main.encrypt(center_text.get("1.0", "end-1c"))
 
 
-        folderpath = filedialog.askdirectory(title="Select a Folder")
+        folderpath = filedialog.askdirectory(title="Speicherpfad festlegen")
         
         os.makedirs(f"{folderpath}/data_{datetime.now().strftime("%Y%m%d%H%M%S")}", exist_ok=True)
 
@@ -556,14 +556,14 @@ def action_button():
             file.write(f'{cryptedtext}\n')
         
         
-        show_message("Successfully encrypted",f"Key and Text was saved at: \n {folderpath}/data_{datetime.now().strftime("%Y%m%d%H%M%S")}")
+        show_message("Erfolgreich verschlüsselt",f"Schlüssel und Text wurde in folgenden Pfad gespeichert: \n {folderpath}/data_{datetime.now().strftime("%Y%m%d%H%M%S")}")
         
 
         center_text.delete(1.0, tk.END) 
         center_text.insert(tk.END, f"{cryptedtext}")  
 
                 
-        print("trying to save file")
+        print("Versuche Datei zu speichern")
 
 def select_file():
     file_path = filedialog.askopenfilename() 
@@ -576,23 +576,23 @@ def select_file():
 bottom_panel = ctk.CTkFrame(root, height=100)
 bottom_panel.pack(side="bottom", padx=10, pady=10)
 
-title_label = ctk.CTkLabel(bottom_panel, text="Choose/Submit Key", font=("Arial", 20))
+title_label = ctk.CTkLabel(bottom_panel, text="Schlüssel auswählen/benutzen", font=("Arial", 20))
 title_label.pack(pady=10)
 
 input_frame = ctk.CTkFrame(bottom_panel)
 input_frame.pack(pady=5)
 
 
-file_entry = ctk.CTkEntry(input_frame, width=400, placeholder_text="Select Key file...")
+file_entry = ctk.CTkEntry(input_frame, width=400, placeholder_text="Wähle eine Schlüsseldatei aus...")
 file_entry.pack(side="left", padx=5, pady = 5)
 
 
-file_button = ctk.CTkButton(input_frame, text="Browse", command=select_file)
+file_button = ctk.CTkButton(input_frame, text="Suchen", command=select_file)
 file_button.pack(side="left", padx=5, pady = 5)
 
 
 
-action_button = ctk.CTkButton(bottom_panel, text="Submit", command=action_button)
+action_button = ctk.CTkButton(bottom_panel, text="Schlüssel benutzen", command=action_button)
 action_button.pack(pady=5)
 
 
