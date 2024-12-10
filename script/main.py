@@ -544,19 +544,19 @@ def action_button():
 
         folderpath = filedialog.askdirectory(title="Speicherpfad festlegen")
         
-        os.makedirs(f"{folderpath}/encrypted_data", exist_ok=True)
+        os.makedirs(f"{folderpath}/verschlüsselte_daten", exist_ok=True)
 
-        with open(f"{folderpath}/encrypted_data/Key.py", "w") as file:
+        with open(f"{folderpath}/verschlüsselte_daten/Key.py", "w") as file:
             file.write(f'{Lock}\n')
             file.write(f"{decryptingtable}\n")
             file.write(f'{modulo1}\n')
             file.write(f"{modulo2}\n")
         
-        with open(f"{folderpath}/encrypted_data/message.txt", "w") as file:
+        with open(f"{folderpath}/verschlüsselte_daten/message.txt", "w") as file:
             file.write(f'{cryptedtext}\n')
         
         
-        show_message("Erfolgreich verschlüsselt",f"Schlüssel und Text wurde in folgenden Pfad gespeichert: \n {folderpath}/encrypted_data")
+        show_message("Erfolgreich verschlüsselt",f"Schlüssel und Text wurde in folgenden Pfad gespeichert: \n {folderpath}/verschlüsselte_daten")
         
 
         center_text.delete(1.0, tk.END) 
