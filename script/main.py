@@ -545,19 +545,19 @@ def action_button():
 
         folderpath = filedialog.askdirectory(title="Select a Folder")
         
-        os.makedirs(f"{folderpath}/data_{datetime.now().strftime("%Y%m%d%H%M%S")}", exist_ok=True)
+        os.makedirs(f"{folderpath}/encrypted_data", exist_ok=True)
 
-        with open(f"{folderpath}/data_{datetime.now().strftime("%Y%m%d%H%M%S")}/Key.py", "w") as file:
+        with open(f"{folderpath}/encrypted_data/Key.py", "w") as file:
             file.write(f'{Lock}\n')
             file.write(f"{decryptingtable}\n")
             file.write(f'{modulo1}\n')
             file.write(f"{modulo2}\n")
         
-        with open(f"{folderpath}/data_{datetime.now().strftime("%Y%m%d%H%M%S")}/message.txt", "w") as file:
+        with open(f"{folderpath}/encrypted_data/message.txt", "w") as file:
             file.write(f'{cryptedtext}\n')
         
         
-        show_message("Successfully encrypted",f"Key and Text was saved at: \n {folderpath}/data_{datetime.now().strftime("%Y%m%d%H%M%S")}")
+        show_message("Successfully encrypted",f"Key and Text saved at: \n {folderpath}/encrypted_data")
         
 
         center_text.delete(1.0, tk.END) 
