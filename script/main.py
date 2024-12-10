@@ -180,29 +180,24 @@ letters = {
 
 def save_config(config_data, file_path='config.py'):
     with open(file_path, 'w') as f:
-        f.write(f"Konfig = {config_data}\n")
+        f.write(f"{config_data}\n")
         print(file_path)
     print(f"Config '{file_path}' gespeichert.")
 
 def load_config(file_path='config.py'):
-
     if not os.path.exists(file_path):
         save_config(letters, file_path) 
         print(f"Config '{file_path}' mit standardwerten erstellt.")
         return letters
     else:
-    
-        config_dict = {}
         with open(file_path, 'r') as f:
-        
-            exec(f.read(), config_dict)
-        print(f"Config '{file_path}' geladen.")
-        return config_dict['letters']
+            first_line = f.readline().strip()  # Read the first line and strip any leading/trailing whitespace
+        print(f"First line of '{file_path}': {first_line}")
+        return first_line
 
 
 
-letters = load_config()
-
+letters = ast.literal_eval(load_config())
 
 
 
